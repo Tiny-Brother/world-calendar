@@ -1,7 +1,7 @@
 .DS_Store
 
 # Project specific
-
+data-db 
 # Terraform
 plan.out
 .terraform

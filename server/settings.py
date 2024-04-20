@@ -38,7 +38,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "app.urls"
+ROOT_URLCONF = "server.urls"
 
 TEMPLATES = [
     {
@@ -56,14 +56,32 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "app.wsgi.application"
+WSGI_APPLICATION = "server.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-mongoengine.connect("mydatabase", host="myhost", port="5555")  # to be replaced
+mongoengine.connect(
+    db="eventcalendar",
+    username="dev",
+    password="dev",
+    host="db",
+    port=27017,
+    authentication_source="admin",
+)
+# from pymongo.mongo_client import MongoClient
+# from pymongo.server_api import ServerApi
 
+# uri = "mongodb+srv://<username>:<password>@eventcalendar.cohvxlc.mongodb.net/?retryWrites=true&w=majority&appName=eventcalendar"
+# # Create a new client and connect to the server
+# client = MongoClient(uri, server_api=ServerApi("1"))
+# Send a ping to confirm a successful connection
+# try:
+#     client.admin.command("ping")
+#     print("Pinged your deployment. You successfully connected to MongoDB!")
+# except Exception as e:
+#     print(e)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

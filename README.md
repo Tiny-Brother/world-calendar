@@ -1,2 +1,7 @@
 # world-calendar
-World calendar to keep track of political and activist events around the world
+
+This is an apolitical calendar that tracks political events around the world and hopes to empower people to be more active in their communities.
+
+## Contributing
+
+## Support us
