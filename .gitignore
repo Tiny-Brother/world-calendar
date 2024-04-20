@@ -175,6 +175,8 @@ cython_debug/
 /.next/
 frontend/.next/
 /out/
+frontend/next-env.d.ts
+frontend/tsconfig.json
 
 # production
 /build
