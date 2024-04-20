@@ -172,7 +172,7 @@ cython_debug/
 /coverage
 
 # next.js
-/.next/
+.next/
 frontend/.next/
 /out/
 frontend/next-env.d.ts
