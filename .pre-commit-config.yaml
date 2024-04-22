@@ -38,7 +38,7 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
-        args: [--write, --parser=json, --config=.gitlab/.prettierrc.json]
+        args: [--write, --parser=json, --config=.github/.prettierrc.json]
         files: '\.json$'
   - repo: https://github.com/zricethezav/gitleaks
     rev: v8.18.2

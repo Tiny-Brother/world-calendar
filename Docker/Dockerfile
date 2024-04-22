@@ -22,11 +22,9 @@ ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-COPY server ./app/server
-COPY world_calendar ./app/world_calendar
-COPY manage.py ./app
+COPY app ./app/app
 
 WORKDIR /app
 
 # Django service
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000", "--no-use-colors", "--no-access-log", "--log-level", "debug"]
