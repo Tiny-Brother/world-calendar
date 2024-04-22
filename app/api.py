@@ -1,19 +1,18 @@
 import os
-from loguru import logger
 
-import app.utils.database_operations as db_ops
-from app.utils.log import setup_logging
-
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Request
 from fastapi.exception_handlers import (
     http_exception_handler,
     request_validation_exception_handler,
 )
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from loguru import logger
 from starlette import status
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.responses import RedirectResponse
+
+from app.utils.log import setup_logging
 
 # from starlette_exporter import PrometheusMiddleware, handle_metrics
 # from starlette_exporter.optional_metrics import response_body_size, request_body_size
@@ -96,8 +95,6 @@ async def validation_exception_handler(request, exc):
 # api.add_route("/metrics", handle_metrics)
 
 
-@app.get(
-    "/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT
-)
+@app.get("/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 def home():
     return "/openapi.json"

@@ -1,11 +1,11 @@
 from mongoengine import (
-    StringField,
     DateTimeField,
-    ListField,
     Document,
-    URLField,
     EmbeddedDocument,
     GenericEmbeddedDocumentField,
+    ListField,
+    StringField,
+    URLField,
 )
 
 

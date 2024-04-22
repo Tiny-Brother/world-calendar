@@ -10,7 +10,7 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_VERSION=1.8.2
 
 RUN pip install "poetry==$POETRY_VERSION"
-    
+
 WORKDIR /app
 
 COPY pyproject.toml poetry.lock /app/

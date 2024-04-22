@@ -1,18 +1,18 @@
 ## Summary
 
-<!-- 
+<!--
 This pull request adds/fixes/improves...
 -->
 
 ## Testing
 
-<!-- 
+<!--
 To test these changes, you can...
 -->
 
 ## Screenshots
 
-<!-- 
+<!--
 If applicable, add screenshots to help explain your changes.
 -->
 
