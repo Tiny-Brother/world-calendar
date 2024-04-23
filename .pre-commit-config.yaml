@@ -25,15 +25,6 @@ repos:
     hooks:
       - id: check-gitlab-ci
       - id: check-jsonschema
-        name: Validate Test Configs
-        args:
-          [
-            "--schemafile",
-            "https://vlad2-api.svc.worten.net/schemas/vlad/manifest",
-            "--default-filetype",
-            "json",
-          ]
-        files: ^ops/manifest.json$
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
     hooks:

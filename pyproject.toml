@@ -25,7 +25,7 @@ black = "^24.1.1"
 ruff = "^0.2.1"
 
 [tool.poetry.scripts]
-app = "app.main:main"
+app = "app.api:main"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,4 +1,5 @@
 import os
+import uvicorn
 
 from fastapi import FastAPI, Request
 from fastapi.exception_handlers import (
@@ -14,9 +15,7 @@ from starlette.responses import RedirectResponse
 
 from app.utils.log import setup_logging
 
-# from starlette_exporter import PrometheusMiddleware, handle_metrics
-# from starlette_exporter.optional_metrics import response_body_size, request_body_size
-
+is_development = os.getenv("ENV") == "development"
 
 setup_logging(json=True)
 logger.info("Starting API")
@@ -44,22 +43,6 @@ app.add_middleware(
     allow_methods=("GET", "POST"),
     allow_headers=["*"],
 )
-# api.add_middleware(
-#     PrometheusMiddleware,
-#     app_name="world_calendar_api",
-#     prefix="world_calendar_api",
-#     group_paths=True,
-#     buckets=[0.1, 0.25, 0.5, 0.75, 1.0],
-#     skip_paths=[
-#         "/metrics",
-#         "/favicon.ico",
-#         "/_/health",
-#         "/docs",
-#         "/openapi.json",
-#         "/",
-#     ],
-#     optional_metrics=[response_body_size, request_body_size],
-# )
 
 
 @app.middleware("http")
@@ -92,9 +75,30 @@ async def validation_exception_handler(request, exc):
 ###
 # API routes
 ###
-# api.add_route("/metrics", handle_metrics)
-
-
-@app.get("/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+@app.get(
+    "/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT
+)
 def home():
     return "/openapi.json"
+
+
+def main(port: int = 80):
+    uvicorn.run(
+        "apps.api.api:api",
+        factory=False,
+        host="0.0.0.0",
+        port=port,
+        log_level="debug" if is_development else "trace",
+        reload=True if is_development else False,
+        timeout_keep_alive=300000,
+        access_log=False,
+        use_colors=False,
+        # ssl_keyfile="path/to/sslkeyfile",
+        # ssl_certfile="path/to/sslcertfile",
+        # ssl_version=ssl.PROTOCOL_TLSv1_2,
+        # ssl_ciphers="ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384",
+    )
+
+
+if __name__ == "__main__":
+    main()
