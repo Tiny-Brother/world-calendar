@@ -10,6 +10,7 @@ plan.out
 tmp/
 gitleaks-report.json
 
+poetry.lock
 # Node.js & JavaScript
 /node_modules
 /npm-debug.log
