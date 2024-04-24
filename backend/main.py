@@ -8,16 +8,15 @@ from fastapi.exception_handlers import (
 )
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+from motor.motor_asyncio import AsyncIOMotorClient
 from loguru import logger
 from starlette import status
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.responses import RedirectResponse
 
-from app.utils.log import setup_logging
-
 is_development = os.getenv("ENV") == "development"
 
-setup_logging(json=True)
 logger.info("Starting API")
 
 # DB env vars
@@ -72,6 +71,17 @@ async def validation_exception_handler(request, exc):
     return await request_validation_exception_handler(request, exc)
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.mongodb_client = AsyncIOMotorClient("mongodb://localhost:27017")
+    app.mongodb = app.mongodb_client.mydatabase
+    yield
+    app.mongodb_client.close()
+
+
+# app.include_router(todo_router, tags=["tasks"], prefix="/task")
+
+
 ###
 # API routes
 ###
@@ -80,6 +90,17 @@ async def validation_exception_handler(request, exc):
 )
 def home():
     return "/openapi.json"
+
+
+@app.get("/healthcheck", include_in_schema=False)
+async def healthcheck() -> dict[str, str]:
+    return {"status": "ok"}
+
+
+# app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+# app.include_router(
+#     external_service_router, prefix="/external-service", tags=["External Service Calls"]
+# )
 
 
 def main(port: int = 80):

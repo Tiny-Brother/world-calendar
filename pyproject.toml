@@ -15,6 +15,10 @@ mongoengine = "^0.28.2"
 pydantic = "^2.7.0"
 uvicorn = "^0.29.0"
 fastapi = "^0.110.2"
+bcrypt = "^4.1.2"
+python-jose = "^3.3.0"
+pydantic-settings = "^2.2.1"
+motor = "^3.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,6 +27,8 @@ pytest = "^7.2.2"
 pre-commit = "^3.3.1"
 black = "^24.1.1"
 ruff = "^0.2.1"
+pytest-asyncio = "^0.23.6"
+async-asgi-testclient = "^1.4.11"
 
 [tool.poetry.scripts]
 app = "app.api:main"
