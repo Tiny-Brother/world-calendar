@@ -33,11 +33,9 @@ async def parse_jwt_user_data_optional(
         return None
 
     try:
-        payload = jwt.decode(
-            token, auth_config.JWT_SECRET, algorithms=[auth_config.JWT_ALG]
-        )
-    except JWTError:
-        raise InvalidToken()
+        payload = jwt.decode(token, auth_config.JWT_SECRET, algorithms=[auth_config.JWT_ALG])
+    except JWTError as err:
+        raise InvalidToken() from err
 
     return JWTData(**payload)
 

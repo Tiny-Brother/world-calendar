@@ -1,6 +1,5 @@
 from typing import Any
 
-from pydantic import model_validator
 from pydantic_settings import BaseSettings
 
 from backend.constants import Environment

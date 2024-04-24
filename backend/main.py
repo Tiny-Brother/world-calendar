@@ -1,6 +1,7 @@
 import os
-import uvicorn
+from contextlib import asynccontextmanager
 
+import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.exception_handlers import (
     http_exception_handler,
@@ -8,9 +9,8 @@ from fastapi.exception_handlers import (
 )
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
-from motor.motor_asyncio import AsyncIOMotorClient
 from loguru import logger
+from motor.motor_asyncio import AsyncIOMotorClient
 from starlette import status
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.responses import RedirectResponse
@@ -85,9 +85,7 @@ async def lifespan(app: FastAPI):
 ###
 # API routes
 ###
-@app.get(
-    "/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT
-)
+@app.get("/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 def home():
     return "/openapi.json"
 

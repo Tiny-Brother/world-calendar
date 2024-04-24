@@ -10,8 +10,8 @@ from backend.auth.dependencies import (
 )
 from backend.auth.jwt import parse_jwt_user_data
 from backend.auth.schemas import AccessTokenResponse, AuthUser, JWTData, UserResponse
-from backend.utils import token
 from backend.models import AuthUser
+from backend.utils import token
 
 router = APIRouter()
 
@@ -63,9 +63,7 @@ async def refresh_tokens(
     refresh_token: dict[str, Any] = Depends(valid_refresh_token),
     user: dict[str, Any] = Depends(valid_refresh_token_user),
 ) -> AccessTokenResponse:
-    refresh_token_value = await service.create_refresh_token(
-        user_id=refresh_token["user_id"]
-    )
+    refresh_token_value = await service.create_refresh_token(user_id=refresh_token["user_id"])
     response.set_cookie(**token.get_refresh_token_settings(refresh_token_value))
 
     worker.add_task(service.expire_refresh_token, refresh_token["uuid"])

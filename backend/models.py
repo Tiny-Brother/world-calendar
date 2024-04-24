@@ -1,28 +1,24 @@
 import datetime
+from datetime import datetime
+from typing import Any
 
+from fastapi.encoders import jsonable_encoder
 from mongoengine import (
+    CASCADE,
+    BinaryField,
+    BooleanField,
     DateTimeField,
     Document,
     EmbeddedDocument,
     GenericEmbeddedDocumentField,
-    ListField,
-    StringField,
     IntField,
-    DateTimeField,
-    BooleanField,
-    BinaryField,
+    ListField,
     ReferenceField,
+    StringField,
     URLField,
-    CASCADE,
 )
-
-from datetime import datetime
-from typing import Any
-from zoneinfo import ZoneInfo
-
-from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, ConfigDict, model_validator
-from datetime import datetime
+from zoneinfo import ZoneInfo
 
 
 def convert_datetime_to_gmt(dt: datetime) -> str:
@@ -42,9 +38,7 @@ class CustomModel(BaseModel):
     @classmethod
     def set_null_microseconds(cls, data: dict[str, Any]) -> dict[str, Any]:
         datetime_fields = {
-            k: v.replace(microsecond=0)
-            for k, v in data.items()
-            if isinstance(v, datetime)
+            k: v.replace(microsecond=0) for k, v in data.items() if isinstance(v, datetime)
         }
 
         return {**data, **datetime_fields}

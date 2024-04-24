@@ -4,18 +4,13 @@ from typing import Any
 
 from pydantic import UUID4
 
-from backend.utils.alphanumeric import generate_random_alphanum
 from backend.auth.config import auth_config
 from backend.auth.exceptions import InvalidCredentials
 from backend.auth.schemas import AuthUser
 from backend.auth.security import check_password, hash_password
 from backend.models import AuthUser, RefreshToken
-from backend.utils.database_operations import (
-    auth_user,
-    execute,
-    fetch_one,
-    RefreshToken,
-)
+from backend.utils.alphanumeric import generate_random_alphanum
+from backend.utils.database_operations import RefreshToken
 
 
 async def create_user(user: AuthUser) -> dict[str, Any] | None:

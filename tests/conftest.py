@@ -1,13 +1,11 @@
 import asyncio
-from typing import Any, Generator, AsyncGenerator
+from typing import Any, AsyncGenerator, Generator
 
 import pytest
 import pytest_asyncio
 from async_asgi_testclient import TestClient
 
 from backend.main import app
-
-from typing import Generator
 
 
 @pytest.fixture(autouse=True, scope="session")
