@@ -1,0 +1,32 @@
+version: "3.8"
+
+volumes:
+  data-db:
+
+services:
+  db:
+    image: mongo:7.0.8
+    restart: always
+    volumes:
+      - ./data-db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dev
+      MONGO_INITDB_ROOT_PASSWORD: dev
+      MONGO_INITDB_DATABASE: eventcalendar
+    ports:
+      - 27017:27017
+  web:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dev
+      - MONGO_INITDB_ROOT_PASSWORD=dev
+      - MONGO_INITDB_DATABASE=eventcalendar
+    depends_on:
+      - db
