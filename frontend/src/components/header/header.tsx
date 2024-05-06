@@ -1,9 +1,12 @@
 'use client';
 
+import { format } from 'date-fns';
 import { ChevronLeft, ChevronRight, Menu, PlusIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useCallback } from 'react';
 
 import { useCalendar } from '@/hooks/use-calendar';
+import { DATE_FORMAT_MONTH_YEAR } from '@/lib/config';
 
 import { Button } from '../ui/button';
 import { CalendarModeSelect } from './calendar-mode-select';
@@ -11,7 +14,7 @@ import { CalendarModeSelect } from './calendar-mode-select';
 const { addDays, subDays } = require('date-fns');
 
 export function Header() {
-  const { setSelectedDate, selectedDate } = useCalendar();
+  const { setSelectedDate, selectedDate, setViewMode } = useCalendar();
 
   const handleNextDate = useCallback(() => {
     setSelectedDate(addDays(selectedDate, 1));
@@ -25,6 +28,10 @@ export function Header() {
     setSelectedDate(subDays(selectedDate, 1));
   }, [setSelectedDate, selectedDate]);
 
+  const handleLogoClick = useCallback(() => {
+    setViewMode('month');
+  }, [setViewMode, setViewMode]);
+
   return (
     <header className="flex  items-center justify-between border-b bg-white px-8 py-2 text-black">
       <div className="flex items-center justify-center gap-12">
@@ -32,9 +39,13 @@ export function Header() {
           <Button variant="ghost" size="icon">
             <Menu className="size-6" />
           </Button>
-          <h1 className="text-lg font-medium">World Calendar</h1>
+          <Link href="/" onClick={handleLogoClick}>
+            <h1 className="text-lg font-medium">World Calendar</h1>
+          </Link>
           <h4 className="ml-8 hidden text-base font-semibold leading-6 text-gray-900 md:flex">
-            <time dateTime="2024-05">March 2024</time>
+            <time dateTime={selectedDate.toISOString()}>
+              {format(selectedDate, DATE_FORMAT_MONTH_YEAR)}
+            </time>
           </h4>
         </div>
       </div>

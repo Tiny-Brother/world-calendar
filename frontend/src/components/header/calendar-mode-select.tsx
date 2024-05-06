@@ -15,7 +15,7 @@ export function CalendarModeSelect() {
   const { setViewMode } = useCalendar();
 
   return (
-    <Select defaultValue="day" onValueChange={setViewMode}>
+    <Select defaultValue="month" onValueChange={setViewMode}>
       <SelectTrigger className="h-9 w-24 font-semibold lg:w-36">
         <SelectValue placeholder="Select view mode" />
       </SelectTrigger>

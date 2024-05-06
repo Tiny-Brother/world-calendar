@@ -9,11 +9,10 @@ import { enUS } from 'date-fns/locale';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn, hours } from '@/lib/utils';
 
-const hours = [
-  12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-];
+const morning = 'AM';
+const afternoon = 'PM';
 
 type CalendarWeekViewProps = {
   currentDate: Date;
@@ -94,7 +93,7 @@ export function CalendarWeekView({
               >
                 <div className="row-end-1 h-7" />
                 {hours.map((hour, index) => {
-                  const suffix = index > 11 ? 'PM' : 'AM';
+                  const suffix = index > 11 ? afternoon : morning;
                   return (
                     <div key={`${hour}+${suffix}`}>
                       <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">

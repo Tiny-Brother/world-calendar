@@ -14,6 +14,7 @@ import { isSameDay } from 'date-fns/isSameDay';
 import { enUS } from 'date-fns/locale';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { DATE_FORMAT_FULL } from '@/lib/config';
 import { cn } from '@/lib/utils';
 
 type CalendarMonthViewProps = {
@@ -54,18 +55,17 @@ export function CalendarMonthView({ currentDate }: CalendarMonthViewProps) {
               weeksInMonth > 5 && 'grid-rows-6',
             )}
           >
-            <AnimatePresence>
-              {daysInMonth.map((day) => (
-                <div
-                  className={cn(
-                    'relative bg-white px-3 py-2',
-                    isSameMonth(day, currentDate) &&
-                      'transition-colors duration-200 ease-in-out hover:bg-primary-foreground',
-                    !isSameMonth(day, currentDate) &&
-                      'bg-gray-50 text-gray-500',
-                  )}
-                  key={day.toString()}
-                >
+            {daysInMonth.map((day) => (
+              <div
+                className={cn(
+                  'relative bg-white px-3 py-2',
+                  isSameMonth(day, currentDate) &&
+                    'transition-colors duration-200 ease-in-out hover:bg-primary-foreground',
+                  !isSameMonth(day, currentDate) && 'bg-gray-50 text-gray-500',
+                )}
+                key={day.toString()}
+              >
+                <AnimatePresence>
                   {isSameDay(day, currentDate) && (
                     <motion.div
                       transition={{
@@ -80,19 +80,19 @@ export function CalendarMonthView({ currentDate }: CalendarMonthViewProps) {
                       )}
                     />
                   )}
-                  <time
-                    className={cn(
-                      'absolute left-1 top-1 z-20 translate-x-[8.5px] translate-y-[1.2px]',
-                      isSameDay(day, currentDate) &&
-                        'text-white transition-colors duration-300 ease-in-out',
-                    )}
-                    dateTime={format(day, 'yyyy-MM-dd')}
-                  >
-                    {format(day, 'd')}
-                  </time>
-                </div>
-              ))}
-            </AnimatePresence>
+                </AnimatePresence>
+                <time
+                  className={cn(
+                    'absolute left-1 top-1 z-20 translate-x-[8.5px] translate-y-[1.2px]',
+                    isSameDay(day, currentDate) &&
+                      'text-white transition-colors duration-300 ease-in-out',
+                  )}
+                  dateTime={format(day, DATE_FORMAT_FULL)}
+                >
+                  {format(day, 'd')}
+                </time>
+              </div>
+            ))}
           </div>
         </div>
       </div>
