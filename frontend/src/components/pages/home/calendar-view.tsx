@@ -1,5 +1,6 @@
-import { CalendarMonthView } from './calendar-month-view';
+import { CalendarWeekView } from './calendar-week-view';
 
 export function CalendarView() {
-  return <CalendarMonthView />;
+  return <CalendarWeekView />;
+  // return <CalendarMonthView />;
 }

@@ -52,6 +52,8 @@ export function CalendarMonthView() {
               <div
                 className={cn(
                   'relative bg-white px-3 py-2',
+                  isSameMonth(day, currentDate) &&
+                    'transition-colors duration-200 ease-in-out hover:bg-primary-foreground',
                   !isSameMonth(day, currentDate) && 'bg-gray-50 text-gray-500',
                   isSameDay(day, currentDate) &&
                     'flex h-6 w-6 items-center justify-center rounded-full bg-primary font-semibold text-white',
