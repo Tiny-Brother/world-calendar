@@ -1,9 +1,30 @@
+'use client';
+
 import { ChevronLeft, ChevronRight, Menu, PlusIcon } from 'lucide-react';
+import { useCallback } from 'react';
+
+import { useCalendar } from '@/hooks/use-calendar';
 
 import { Button } from '../ui/button';
 import { CalendarModeSelect } from './calendar-mode-select';
 
+const { addDays, subDays } = require('date-fns');
+
 export function Header() {
+  const { setSelectedDate, selectedDate } = useCalendar();
+
+  const handleNextDate = useCallback(() => {
+    setSelectedDate(addDays(selectedDate, 1));
+  }, [setSelectedDate, selectedDate]);
+
+  const handleTodayDate = useCallback(() => {
+    setSelectedDate(new Date());
+  }, [setSelectedDate]);
+
+  const handlePreviousDate = useCallback(() => {
+    setSelectedDate(subDays(selectedDate, 1));
+  }, [setSelectedDate, selectedDate]);
+
   return (
     <header className="flex  items-center justify-between border-b bg-white px-8 py-2 text-black">
       <div className="flex items-center justify-center gap-12">
@@ -24,6 +45,7 @@ export function Header() {
               className="flex w-12 rounded-r-none shadow-none"
               variant="ghost"
               size="sm"
+              onClick={handlePreviousDate}
             >
               <span className="sr-only">Previous month</span>
               <ChevronLeft className="size-4" />
@@ -32,6 +54,7 @@ export function Header() {
               className="hidden rounded-none px-3.5 text-sm font-semibold text-gray-900 shadow-none hover:bg-gray-50 focus:relative md:block"
               variant="ghost"
               size="sm"
+              onClick={handleTodayDate}
             >
               Today
             </Button>
@@ -39,6 +62,7 @@ export function Header() {
             <Button
               className="h-9 w-12 rounded-l-none shadow-none"
               variant="ghost"
+              onClick={handleNextDate}
             >
               <span className="sr-only">Next month</span>
               <ChevronRight className="size-4" />

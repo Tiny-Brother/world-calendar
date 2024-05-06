@@ -1,3 +1,7 @@
+'use client';
+
+import { useCalendar } from '@/hooks/use-calendar';
+
 import {
   Select,
   SelectContent,
@@ -8,8 +12,10 @@ import {
 } from '../ui/select';
 
 export function CalendarModeSelect() {
+  const { setViewMode } = useCalendar();
+
   return (
-    <Select defaultValue="day">
+    <Select defaultValue="day" onValueChange={setViewMode}>
       <SelectTrigger className="h-9 w-24 font-semibold lg:w-36">
         <SelectValue placeholder="Select view mode" />
       </SelectTrigger>
