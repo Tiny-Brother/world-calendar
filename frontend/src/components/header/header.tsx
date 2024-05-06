@@ -5,20 +5,20 @@ import { CalendarModeSelect } from './calendar-mode-select';
 
 export function Header() {
   return (
-    <header className="flex  items-center justify-between border-b bg-white px-8 py-2.5 text-black">
-      <div className="flex items-center gap-12">
+    <header className="flex  items-center justify-between border-b bg-white px-8 py-2 text-black">
+      <div className="flex items-center justify-center gap-12">
         <div className="flex items-center gap-6">
           <Button variant="ghost" size="icon">
-            <Menu className="size-4" />
+            <Menu className="size-6" />
           </Button>
           <h1 className="text-lg font-medium">World Calendar</h1>
-          <h4 className="ml-8 text-base font-semibold leading-6 text-gray-900">
+          <h4 className="ml-8 hidden text-base font-semibold leading-6 text-gray-900 md:flex">
             <time dateTime="2024-05">March 2024</time>
           </h4>
         </div>
       </div>
-      <div className="flex items-center gap-2">
-        <div className="flex items-center">
+      <div className="flex items-center justify-center gap-2">
+        <div className="hidden items-center lg:flex">
           <div className="relative flex items-center rounded-md border bg-white md:items-stretch">
             <Button
               className="flex w-12 rounded-r-none shadow-none"
@@ -45,8 +45,10 @@ export function Header() {
             </Button>
           </div>
         </div>
-        <CalendarModeSelect />
-        <div className="h-6 w-px bg-gray-300" />
+        <div className="hidden sm:flex">
+          <CalendarModeSelect />
+        </div>
+        <div className="hidden h-6 w-px bg-gray-300 md:flex" />
         <Button className="hidden gap-2 sm:flex md:w-24 lg:w-32" size="sm">
           <PlusIcon className="size-4" />
           Add Event
