@@ -12,10 +12,10 @@ import {
 } from '../ui/select';
 
 export function CalendarModeSelect() {
-  const { setViewMode } = useCalendar();
+  const { setViewMode, viewMode } = useCalendar();
 
   return (
-    <Select defaultValue="month" onValueChange={setViewMode}>
+    <Select value={viewMode} onValueChange={setViewMode}>
       <SelectTrigger className="h-9 w-24 font-semibold lg:w-36">
         <SelectValue placeholder="Select view mode" />
       </SelectTrigger>

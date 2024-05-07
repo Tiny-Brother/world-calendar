@@ -69,23 +69,24 @@ export function CalendarMonthView({ currentDate }: CalendarMonthViewProps) {
                   {isSameDay(day, currentDate) && (
                     <motion.div
                       transition={{
-                        type: 'spring',
                         stiffness: 50,
-                        duration: 0.5,
+                        duration: 0.3,
                       }}
                       layoutId="date-dot"
                       className={cn(
                         'absolute',
                         'left-1 top-1 z-10 flex size-6 items-center justify-center rounded-full bg-primary font-semibold text-white transition-colors duration-150 ease-out',
                       )}
-                    />
+                    >
+                      {format(day, 'd')}
+                    </motion.div>
                   )}
                 </AnimatePresence>
                 <time
                   className={cn(
                     'absolute left-1 top-1 z-20 translate-x-[8.5px] translate-y-[1.2px]',
                     isSameDay(day, currentDate) &&
-                      'text-white transition-colors duration-300 ease-in-out',
+                      'duration-400 opacity-0 transition-all ease-in-out',
                   )}
                   dateTime={format(day, DATE_FORMAT_FULL)}
                 >

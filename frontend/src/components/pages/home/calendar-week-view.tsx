@@ -59,20 +59,21 @@ export function CalendarWeekView({
                         {isSameDay(dayOfWeek, currentDate) && (
                           <motion.span
                             transition={{
-                              type: 'spring',
                               stiffness: 50,
-                              duration: 0.5,
+                              duration: 0.3,
                             }}
                             layoutId="date-dot"
-                            className="absolute -left-0.5 -top-1  size-8 rounded-full bg-primary  p-1.5 text-white"
-                          />
+                            className="absolute -top-1 left-[-3.5px] flex size-8 items-center  justify-center rounded-full bg-primary p-1.5 text-white"
+                          >
+                            {format(dayOfWeek, 'd')}
+                          </motion.span>
                         )}
                       </AnimatePresence>
                       <span
                         className={cn(
-                          'left-0 top-0 z-10',
+                          'left-0 top-0',
                           isSameDay(dayOfWeek, currentDate) &&
-                            'text-white transition-colors duration-300 ease-in-out',
+                            'duration-400 text-white opacity-0 transition-all ease-in-out',
                         )}
                       >
                         {format(dayOfWeek, 'd')}

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useCallback } from 'react';
 
 import { useCalendar } from '@/hooks/use-calendar';
+import { useSidebar } from '@/hooks/use-sidebar';
 import { DATE_FORMAT_MONTH_YEAR } from '@/lib/config';
 
 import { Button } from '../ui/button';
@@ -15,6 +16,7 @@ const { addDays, subDays } = require('date-fns');
 
 export function Header() {
   const { setSelectedDate, selectedDate, setViewMode } = useCalendar();
+  const { setIsOpen, isOpen } = useSidebar();
 
   const handleNextDate = useCallback(() => {
     setSelectedDate(addDays(selectedDate, 1));
@@ -30,22 +32,24 @@ export function Header() {
 
   const handleLogoClick = useCallback(() => {
     setViewMode('month');
-  }, [setViewMode, setViewMode]);
+  }, [setViewMode]);
+
+  const handleOpenSideBar = useCallback(() => {
+    setIsOpen(!isOpen);
+  }, [setIsOpen, isOpen]);
 
   return (
     <header className="flex  items-center justify-between border-b bg-white px-8 py-2 text-black">
       <div className="flex items-center justify-center gap-12">
         <div className="flex items-center gap-6">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={handleOpenSideBar}>
             <Menu className="size-6" />
           </Button>
           <Link href="/" onClick={handleLogoClick}>
             <h1 className="text-lg font-medium">World Calendar</h1>
           </Link>
           <h4 className="ml-8 hidden text-base font-semibold leading-6 text-gray-900 md:flex">
-            <time dateTime={selectedDate.toISOString()}>
-              {format(selectedDate, DATE_FORMAT_MONTH_YEAR)}
-            </time>
+            <time>{format(selectedDate, DATE_FORMAT_MONTH_YEAR)}</time>
           </h4>
         </div>
       </div>
