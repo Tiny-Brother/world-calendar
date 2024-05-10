@@ -9,7 +9,8 @@ import { enUS } from 'date-fns/locale';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Button } from '@/components/ui/button';
-import { cn, hours } from '@/lib/utils';
+import { hours } from '@/lib/time';
+import { cn } from '@/lib/utils';
 
 const morning = 'AM';
 const afternoon = 'PM';

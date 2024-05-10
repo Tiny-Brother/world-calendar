@@ -88,9 +88,11 @@ export function Header() {
           <CalendarModeSelect />
         </div>
         <div className="hidden h-6 w-px bg-gray-300 md:flex" />
-        <Button className="hidden gap-2 sm:flex md:w-24 lg:w-32" size="sm">
-          <PlusIcon className="size-4" />
-          Add Event
+        <Button className="hidden gap-2 md:w-24 lg:w-32" size="sm" asChild>
+          <Link className="size-full sm:flex" href="/events">
+            <PlusIcon className="size-4" />
+            Add Event
+          </Link>
         </Button>
       </div>
     </header>

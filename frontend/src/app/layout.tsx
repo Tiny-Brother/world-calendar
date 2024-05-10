@@ -3,7 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import { Header } from '@/components/header/header';
+import TanstackQueryProvider from '@/components/providers/tanstack-query-provider';
 import { Modal } from '@/components/ui/modal';
 import { cn } from '@/lib/utils';
 
@@ -23,11 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, 'no-scrollbar')}>
-        <div className="relative">
-          <Modal />
-          <Header />
-          {children}
-        </div>
+        <TanstackQueryProvider>
+          <div className="relative">
+            <Modal />
+            {children}
+          </div>
+        </TanstackQueryProvider>
       </body>
     </html>
   );

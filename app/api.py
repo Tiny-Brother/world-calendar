@@ -1,6 +1,6 @@
 import os
-import uvicorn
 
+import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.exception_handlers import (
     http_exception_handler,
@@ -75,9 +75,7 @@ async def validation_exception_handler(request, exc):
 ###
 # API routes
 ###
-@app.get(
-    "/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT
-)
+@app.get("/", response_class=RedirectResponse, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 def home():
     return "/openapi.json"
 

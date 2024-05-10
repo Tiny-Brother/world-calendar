@@ -27,7 +27,7 @@ export const Sidebar = ({ className }: SidePanelProps) => {
       {isOpen && (
         <motion.aside
           className={cn(
-            'h-full min-h-screen w-0 overflow-scroll bg-white shadow-sm	md:w-[380px]	',
+            'h-full w-0 overflow-scroll bg-white md:w-[380px]',
             className,
           )}
           {...sidebarPanelAnimation}

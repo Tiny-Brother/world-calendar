@@ -1,4 +1,4 @@
-import { hours } from '@/lib/utils';
+import { hours } from '@/lib/time';
 
 const morning = 'AM';
 const afternoon = 'PM';
